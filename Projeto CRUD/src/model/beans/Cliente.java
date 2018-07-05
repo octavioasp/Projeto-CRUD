@@ -1,5 +1,14 @@
 package model.beans;
 
+/*
+ * @autor : Octavio Augusto da Silva Pereira,
+ *          Otavio Augusto Ferreira Coelho
+ * 
+ * // Sobrescrita método toString
+ * 
+ * Classe Cliente
+ */
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -16,6 +25,7 @@ public class Cliente implements Serializable {
 	private String bairro;
 	private String sexo;
 
+	// Metodos Getter e Setter
 	public int getCodigo() {
 		return codigo;
 	}
@@ -61,6 +71,7 @@ public class Cliente implements Serializable {
 	}
 
 	public void setCep(String cep) {
+		// Elimina caracteres especiais exibidos diretamente no banco
 		cep = cep.replaceAll("-", "");
 		this.cep = cep;
 	}
@@ -70,6 +81,7 @@ public class Cliente implements Serializable {
 	}
 
 	public void setCpf(String cpf) {
+		// Elimina caracteres especiais exibidos diretamente no banco
 		cpf = cpf.replaceAll("\\.", "").replaceAll("-", "");
 		this.cpf = cpf;
 	}
@@ -79,6 +91,7 @@ public class Cliente implements Serializable {
 	}
 
 	public void setTelefone(String telefone) {
+		// Elimina caracteres especiais exibidos diretamente no banco
 		telefone = telefone.replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("-", "").replaceAll(" ", "");
 		this.telefone = telefone;
 	}
@@ -107,6 +120,7 @@ public class Cliente implements Serializable {
 		this.sexo = sexo;
 	}
 
+	// Sobrescrita metodo toString
 	@Override
 	public String toString() {
 		return "Cliente{" + "codigo=" + codigo + ", nome='" + nome + '\'' + ", endereco='" + endereco + '\''
@@ -115,6 +129,7 @@ public class Cliente implements Serializable {
 				+ ", bairro='" + bairro + '\'' + '}';
 	}
 
+	// Sobrescrita metodo toString
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -130,6 +145,7 @@ public class Cliente implements Serializable {
 				&& Objects.equals(bairro, cliente.bairro);
 	}
 
+	// Sobrescrita metodo toString
 	@Override
 	public int hashCode() {
 

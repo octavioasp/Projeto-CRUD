@@ -1,5 +1,12 @@
 package model.dao;
 
+/*
+ * @autor : Octavio Augusto da Silva Pereira
+ * 
+ * DAO da classe Cliente 
+ * 
+ */
+
 import model.beans.Cliente;
 import util.Conexao;
 
@@ -17,13 +24,16 @@ public class ClienteDAO {
 	ResultSet resultSet;
 	private Connection connection;
 
+	// Construtor classe ClienteDAO
 	public ClienteDAO() {
 		this.connection = Conexao.getConexao();
 
 	}
 
+	// Metodo que salva os dados no banco
 	public void salvar(Cliente cliente) {
 
+		// SQL - Inserção dados clientes no banco
 		String sql = "INSERT INTO cliente " + "("
 				+ "cli_nome, cli_endereco, cli_cidade, cli_uf, cli_cep, cli_bairro, cli_cpf, "
 				+ "cli_telefone, cli_email, cli_sexo" + ") VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
@@ -54,6 +64,7 @@ public class ClienteDAO {
 
 	}
 
+	// Método que lista os dados do banco
 	public List<Cliente> listar() {
 
 		List<Cliente> list = new ArrayList<Cliente>();
@@ -88,6 +99,7 @@ public class ClienteDAO {
 		return list;
 	}
 
+	// Método para alterar os dados no banco
 	public void alterar(Cliente cliente) {
 
 		String sql = "UPDATE cliente SET cli_nome = ?, cli_endereco = ?, cli_cidade = ?,"
@@ -119,6 +131,7 @@ public class ClienteDAO {
 
 	}
 
+	// Método para excluir os dados no banco
 	public void excluir(int codigo) {
 		try {
 			preparedStatement = connection.prepareStatement("DELETE FROM cliente WHERE cli_codigo = ?");
@@ -132,6 +145,7 @@ public class ClienteDAO {
 		}
 	}
 
+	// Método para pesquisar por Id os dados no banco
 	public Cliente pesquisarId(int codigo) {
 
 		Cliente cliente = new Cliente();
@@ -166,6 +180,7 @@ public class ClienteDAO {
 		return cliente;
 	}
 
+	// Método para pesquisar por nome os dados no banco
 	public List<Cliente> pesquisarNome(String str) {
 
 		List<Cliente> list = new ArrayList<Cliente>();
@@ -201,9 +216,11 @@ public class ClienteDAO {
 		return list;
 	}
 
+	// Método para carregar a grade com os dados do banco
 	public ResultSet carregarGrade() {
 		try {
-			preparedStatement = connection.prepareStatement("SELECT cli_codigo, cli_nome FROM cliente ORDER BY cli_codigo");
+			preparedStatement = connection
+					.prepareStatement("SELECT cli_codigo, cli_nome FROM cliente ORDER BY cli_codigo");
 			resultSet = preparedStatement.executeQuery();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -213,6 +230,7 @@ public class ClienteDAO {
 
 	}
 
+	// Método para pesquisar os dados no banco
 	public ResultSet pesquisa(String campo, String valor) {
 
 		String sql = "SELECT cli_codigo, cli_nome, cli_endereco, cli_cidade, cli_uf, cli_cep, cli_bairro, cli_cpf, cli_telefone, cli_email, cli_sexo FROM cliente WHERE "
@@ -230,6 +248,7 @@ public class ClienteDAO {
 
 	}
 
+	// Método para exibir os títulos escolhidos na tela inicial
 	public List<String> nomeCampos() {
 		List<String> campos = new ArrayList<String>();
 		try {
